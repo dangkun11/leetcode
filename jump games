@@ -1,4 +1,4 @@
-#题目
+# 题目
 
 Given an array of non-negative integers, you are initially positioned at the first index of the array.
 
@@ -9,17 +9,17 @@ Determine if you are able to reach the last index.
 给定一个非负的整数数组，起始位置在数组的第一个索引。数组的每个元素代表在这个位置上可以跳跃的最大步数。
 给出是否能到达数组的最后一个索引。
 
-#例子
+# 例子
 array={3,2,1,1,4}
 3步从索引0跳到索引3，1步从索引3跳到索引4，返回true
 
 array={3,2,1,0,4}
 索引3无论如何都会到达，但索引3处只能跳0步，无论如何达不到最后的索引，返回false
 
-#思路
+# 思路
 每个索引开始计算之前，我们可以拿到该索引之前可以到达的最大的索引数，若之前的最大到达点达不到该处，则到达不了最后。
 
-#实现
+# 实现
 
 public boolean canJump(int[] a){
 	if(a == null){
