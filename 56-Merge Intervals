@@ -1,1 +1,38 @@
+# 题目
+Given a collection of intervals, merge all overlapping intervals.
 
+给定数组列表，合并所有重叠的数组
+
+# 示例
+
+如[ [1,2],[2,6],[8,10] ]
+返回[ [1,6],[8,10] ]
+
+# 思路
+
+将列表中的数组按照第一个元素按照从小到大进行排序，将第一个数组放入列表，然后从第一个元素的后一个和下一个数组
+中的第一个元素进行比较，若第一个元素的后一个>=下个元素的第一个，则合并两个数组，第一个数组的后一个元素为第一
+个数组第二个元素与后一个数组第二个元素的最大值，若第一个元素的后一个>下个元素的第一个,则将下一个数组加入列表，
+重复上述过程。最后将列表转为数组。
+
+# 实现
+public int[][] merge(int[][] intervals) {
+        if(intervals.length<=1){
+            return intervals;
+        }
+        Arrays.sort(intervals,(i1,i2)->Integer.compare(i1[0],i2[0]));
+
+        List<int[]> result = new ArrayList<>();
+        int[] curIntervals = intervals[0];
+        result.add(curIntervals);
+
+        for(int[] interval:intervals){
+            if(curIntervals[1]>=interval[0]){
+                curIntervals[1] = Math.max(curIntervals[1],interval[1]);
+            }else{
+                curIntervals = interval;
+                result.add(curIntervals);
+            }
+        }
+        return result.toArray(new int[result.size()][]);
+}
