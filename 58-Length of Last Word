@@ -1,1 +1,49 @@
+# 题目
+Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
+
+If the last word does not exist, return 0.
+
+Note: A word is defined as a character sequence consists of non-space characters only.
+
+给定一个包含大小写字符和空格字符的字符串，返回字符串中最后一个单词的长度。
+如果最后一个单词不存在，则返回0。
+注意：单词的定义是不包含空格字符的字符序列。
+
+# 示例
+输入："Hello World"
+输出：5
+
+# 思路
+1.首先获取字符串的最后一个字符位置，然后从该字符向前遍历，直到为空格的字符停止，此时的长度即为最后一个单词的长度
+2.将字符串的前后空格去除，然后总长度减掉 最后一个空格字符的索引 再减掉1 即为最后一个单词的长度
+
+# 实现
+1.
+public static int lengthOfLastWord(String s) {
+        if (s == null || s.length() <= 0) {
+            return 0;
+        }
+        int lastCharIndex = 0;
+        int result = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) != ' ') {
+                lastCharIndex = i;
+                break;
+            }
+        }
+        int i = lastCharIndex;
+        while (i >= 0 && s.charAt(i) != ' ') {
+            result++;
+            i--;
+        }
+        return result;
+ }
+ 
+ 2.
+ public static int lengthOfLastWord(String s) {
+        if (s == null || s.length() <= 0) {
+            return 0;
+        }
+        return s.trim().length() - s.trim().lastIndexOf(" ") -1;
+ }
 
