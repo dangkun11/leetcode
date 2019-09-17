@@ -1,1 +1,60 @@
+# 题目
+Given a positive integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
 
+给定一个正整数，生成一个方阵，方阵由1到n*n 元素螺旋式来进行填充
+
+# 示例
+n=3,则输出
+[1 2 3
+ 8 9 4
+ 7 6 5]
+ 
+# 思路
+使用up，down，right，left表示矩阵的上下左右，按照up行，left列，down行，right列的顺序来进行填充，
+知道填充的元素达到n*n为止
+
+# 实现
+public int[][] generateMatrix(int n) {
+        if (n <= 0) {
+            return null;
+        }
+        int[][] result = new int[n][n];
+        int up = 0;
+        int left = n - 1;
+        int down = n - 1;
+        int right = 0;
+        int num = 1;
+        while (true) {
+            for (int i = right; i <= left; i++) {
+                result[up][i] = num++;
+            }
+            up++;
+            if (num == n * n + 1) {
+                break;
+            }
+
+            for (int i = up; i <= down; i++) {
+                result[i][left] = num++;
+            }
+            left--;
+
+            if (num == n * n + 1) {
+                break;
+            }
+
+            for (int i = left; i >= right; i--) {
+                result[down][i] = num++;
+            }
+            down--;
+
+            if (num == n * n + 1) {
+                break;
+            }
+
+            for (int i = down; i >= up; i--) {
+                result[i][right] = num++;
+            }
+            right++;
+        }
+        return result;
+}
